@@ -6,8 +6,13 @@ import random, math, time
 
 print("This program is a demo of Single Nucleotide Polymorphisms, or SNPs.")
 print("Using arbitrary text, the program will track how long it takes to reach the string 'METHINKS IT IS LIKE A WEASEL', where that text is the most 'fit'")
-query=input("Please enter a start string.")
+try: query=raw_input("Please enter a start string >> ")
+except NameError: query=input("Please enter a start string >> ")
 wstring = query.upper()
+
+###########################
+# Configuration
+###########################
 selector = "ABCDEFGHIJKLMNOPQRSTUVWXYZ " # Can change to goal alphabet, such as including lower case, or GTAC.
 soln = "METHINKS IT IS LIKE A WEASEL" #Target output
 
@@ -23,10 +28,9 @@ localpeak = 20000 # Evolutionary peak stopper. Stops when reaches a local maxima
 ## Would reccommend 500 000 / generationtime. (half million years) for physical resembelance; 250000/children for speed.
 
 # What degree of unoptomized individuals in a generation prosper (score variance). 
-var_mult = 1 
-## Strongly reccommend > 0.3
+var_mult = 1 # Strongly reccommend > 0.3
 
-#How "valued" are correct characters?
+# How "valued" are correct characters?
 cstringweight = 1.1 
 ## 1 would be equally valued to everything; values greater than 1 select for correct characters over expansion of genome. Values of less than 1 selects for expansion more than correctness.
 
