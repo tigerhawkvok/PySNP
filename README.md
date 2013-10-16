@@ -1,6 +1,6 @@
 # PySNP
 
-A program based on Richard Dawkins' "Methinks it is like a weasel" example. Inspired by (http://scienceblogs.com/pharyngula/2009/08/but_why_would_dawkins_want_to.php)[http://scienceblogs.com/pharyngula/2009/08/but_why_would_dawkins_want_to.php].
+A program based on Richard Dawkins' "Methinks it is like a weasel" example. Inspired by [this Pharyngula post](http://scienceblogs.com/pharyngula/2009/08/but_why_would_dawkins_want_to.php).
 
 ## Constants
 The following constants can be edited in the file to change the mutation parameters.
