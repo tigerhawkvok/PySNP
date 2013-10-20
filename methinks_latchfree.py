@@ -1,6 +1,7 @@
 # Dawkin's "METHINK IT IS LIKE A WEASEL" program.  Latch free and highly configureable 
 # Inspired by http://scienceblogs.com/pharyngula/2009/08/but_why_would_dawkins_want_to.php
 # CC-BY-SA_3.0 Philip Kahn 2009
+## Todo - add generalizations to use genetics to brute-force things
 
 import random, math, time
 
