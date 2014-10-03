@@ -1,6 +1,6 @@
 # Dawkin's "METHINK IT IS LIKE A WEASEL" program.  Latch free and highly configureable 
 # Inspired by http://scienceblogs.com/pharyngula/2009/08/but_why_would_dawkins_want_to.php
-# CC-BY-SA_3.0 Philip Kahn 2009
+# GPLv3 Philip Kahn 2009
 ## Todo - add generalizations to use genetics to brute-force things
 
 import random, math, time
@@ -65,10 +65,10 @@ while wstring != soln:
         if ratecheck < duprate:
             num = math.floor(duprate/ratecheck) #Number of duplications that appear
             slength = len(wstringn)
-            if slength !=1: bit = random.randrange(0,slength)
+            if slength is not 1: bit = random.randrange(0,slength)
             else: bit = 0 #you can only duplicate bit 0 if there is one bit
             if random.random() > .5: #duplication or deletion?
-                if bit !=0: wstringn = wstringn[:bit] + wstringn[bit-num:] #duplicate a random bit
+                if bit is not 0: wstringn = wstringn[:bit] + wstringn[bit-num:] #duplicate a random bit
                 else: wstringn = wstringn + wstringn #fix for single character
             else: 
                 wstringn = wstringn[:bit+1] + wstringn[bit-num:] #delete a random bit
@@ -82,12 +82,12 @@ while wstring != soln:
                 letter = selector[random.randrange(0,len(selector),1)]
                 while letter == wstringn[bit]: # Don't replace with same letter
                     letter = selector[random.randrange(0,len(selector),1)]
-                if debug ==1: 
+                if debug is 1: 
                     if nimp > 500: print("  Before: "+wstringn+" @ bit "+str(bit)+" with "+letter)
                 if bit!=0: wstringn = wstringn[:bit] + letter + wstringn[bit+1:] #replace a random bit with a random letter
                 else: wstringn = letter + wstringn[1:]
                 nc +=1
-            if debug == 1: 
+            if debug is 1: 
                 if nimp > 500: print(wstringn)
         # Mutations are done on this child.  Replace the stored version with this one.
         wstringa[j]=wstringn
@@ -116,11 +116,12 @@ while wstring != soln:
         if match > matchhigh: # Checks matched bits
             matchhigh = match
             if matchhigh > matchold:
-                if debug == 1: print("High match, "+str(matchhigh)+"|"+str(matchold)+": "+x)
+                if debug is 1: print("High match, "+str(matchhigh)+"|"+str(matchold)+": "+x)
                 matchold = matchhigh
-                if debug == 1: print(score,n)
-                if debug == 1: print(wstringscore)
-        if debug == 1: 
+                if debug is 1: 
+                    print(score,n)
+                    print(wstringscore)
+        if debug is 1: 
             if nimp > 500: print(score)
         wstringscore.append(score) # add the score to the list
         n+=1
@@ -134,35 +135,38 @@ while wstring != soln:
         m += 1
     index = random.randrange(0,len(higharr)) # Selects random individual from most-fit population
     if wstringscore[higharr[index]] < max(wstringscore): 
-        if debug == 1: print("ERROR 1: Not most fit individual selected, or rounding error") # Debugging
-        if debug == 1: time.sleep(1) # Debugging
+        if debug is 1: 
+            print("ERROR 1: Not most fit individual selected, or rounding error") # Debugging
+            time.sleep(1) # Debugging
     elif wstringscore[higharr[index]] < scoreold: 
-        if debug == 1: print("ERROR 2: Fittest individual is less fit than any in previous generation.")  # Debugging
-        if debug == 1: time.sleep(1) # Debugging
+        if debug is 1: 
+            print("ERROR 2: Fittest individual is less fit than any in previous generation.")  # Debugging
+            time.sleep(1) # Debugging
     else: 
         improvement = wstringscore[higharr[index]] - scoreold ###Book-keeping for generational cap
         scoreold = wstringscore[higharr[index]]###
         if improvement == 0: nimp += 1  ###
         else: nimp = 0 ###
-        if debug == 1: print("Improvement: "+str(improvement)) # Debugging
+        if debug is 1: print("Improvement: "+str(improvement)) # Debugging
         if improvement < 0: 
-            if debug == 1: print("ERROR 3: Fittest regression from peak.") # Debugging
-            if debug == 1: time.sleep(1) # Debugging
+            if debug is 1: 
+                print("ERROR 3: Fittest regression from peak.") # Debugging
+                time.sleep(1) # Debugging
     winner=higharr[index] # Selects the actual individual
-    if debug == 1: print("Winner: "+str(higharr[index]))
+    if debug is 1: print("Winner: "+str(higharr[index]))
     wstring = wstringa[winner] # Stores individual for next loop
-    if debug == 1: 
-        if i % 500 == 0: wstring = wstringa[random.randrange(0,len(wstringscore))] # Every 500 generations we just pick a random individual
+    if debug is 1: 
+        if i % 500 is 0: wstring = wstringa[random.randrange(0,len(wstringscore))] # Every 500 generations we just pick a random individual
     i+=1
     ## Output formatting, and remainders from debugging
     cnum=higharr[index]
     for good in higharr:
-        if good == winner: wstring = wstringa[good]
+        if good is winner: wstring = wstringa[good]
     if cnum < 10: cnum = " "+str(cnum)
     else: cnum = str(cnum)
     lenmatch = len(wstring)/len(soln)
     totalmatch =  (len(soln) - matchhigh)/len(soln) + math.fabs(lenmatch-1)*100
-    if debug ==1: scoreoutput = "Score: " + str(wstringscore[higharr[index]]) + " with "
+    if debug is 1: scoreoutput = "Score: " + str(wstringscore[higharr[index]]) + " with "
     else: scoreoutput = "Currently with "
     ## output
     print("Generation " + str(i) + ", child "+cnum+": " + wstring + ". "+scoreoutput+str(matchhigh)+" character matches and "+str(len(wstring)/len(soln))+" length match for "+str(totalmatch)+"% error.")
