@@ -5,17 +5,19 @@
 
 import random, math, time
 
-print("This program is a demo of Single Nucleotide Polymorphisms, or SNPs.")
-print("Using arbitrary text, the program will track how long it takes to reach the string 'METHINKS IT IS LIKE A WEASEL', where that text is the most 'fit'")
-try: query=raw_input("Please enter a start string >> ")
-except NameError: query=input("Please enter a start string >> ")
-wstring = query.upper()
-
 ###########################
 # Configuration
 ###########################
 selector = "ABCDEFGHIJKLMNOPQRSTUVWXYZ " # Can change to goal alphabet, such as including lower case, or GTAC.
 soln = "METHINKS IT IS LIKE A WEASEL" #Target output
+
+### Announce to user
+print("This program is a demo of Single Nucleotide Polymorphisms, or SNPs.")
+print("Using arbitrary text, the program will track how long it takes to reach the string '"+soln+"', where that text is the most 'fit'")
+try: query=raw_input("Please enter a start string >> ")
+except NameError: query=input("Please enter a start string >> ")
+wstring = query.upper()
+
 
 # Mutation rates
 pointrate = .05 #Accepts to .001 percent.
